@@ -1,0 +1,20 @@
+app.controller('myController',function($scope, $http, $filter){
+
+        $scope.embeddedDate=new Date();
+
+        $scope.$watch('embeddedDate', function() {
+
+        $scope.date = $filter('date')($scope.embeddedDate,"dd-MM-yyyy");
+
+        $http.get("getBirthdays/"+$scope.date).then( function(response){
+
+                        $scope.employees=response.data.data.empList;
+
+                        
+
+                });
+
+        }, true);
+
+        
+
